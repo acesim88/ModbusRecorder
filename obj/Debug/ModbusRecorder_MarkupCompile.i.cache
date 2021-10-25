@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\ModbusRecorder\ModbusRecorder\App.xaml
-11151548125
+4-298698667
 
-61434861427
-13-1505183044
-MainWindow.xaml;
+201283807369
+1271219169877
+MainWindow.xaml;SampleMessageDialog.xaml;AddRecordWindow.xaml;SettingsWindow.xaml;
 
-True
+False
 

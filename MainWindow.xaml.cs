@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
+using ModbusRecorder.ViewModel;
 
 namespace ModbusRecorder
 {
@@ -22,7 +17,113 @@ namespace ModbusRecorder
     {
         public MainWindow()
         {
+
             InitializeComponent();
+
+            var viewModel = Injector.GetInstance<MainWindowViewModel>();
+
+            DataContext = viewModel;
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await ((MainWindowViewModel)DataContext)?.GetBtc();
+        }
+
+        private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var sampleMessageDialog = new SampleMessageDialog
+            {
+                Message = { Text = ((ButtonBase)sender).Content.ToString() }
+            };
+
+            await DialogHost.Show(sampleMessageDialog, "RootDialog");
+        }
+
+        private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //until we had a StaysOpen glag to Drawer, this will help with scroll bars
+            var dependencyObject = Mouse.Captured as DependencyObject;
+
+            while (dependencyObject != null)
+            {
+                if (dependencyObject is ScrollBar) return;
+                dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
+            }
+
+            MenuToggleButton.IsChecked = false;
+        }
+
+        private void MenuToggleButton_OnClick(object sender, RoutedEventArgs e)
+            => DemoItemsSearchBox.Focus();
+
+        private void AddRecordPopupButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            AddRecordWindow addRecordWindow = new AddRecordWindow();
+            addRecordWindow.DataContext = new AddRecordWindowViewModel();
+            addRecordWindow.Show();
+        }
+
+        private void ClosePopupButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void SettingsButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
         }
     }
+    public class Time
+    {
+        public string updated { get; set; }
+        public DateTime updatedISO { get; set; }
+        public string updateduk { get; set; }
+    }
+
+    public class USD
+    {
+        public string code { get; set; }
+        public string symbol { get; set; }
+        public string rate { get; set; }
+        public string description { get; set; }
+        public double rate_float { get; set; }
+    }
+
+    public class GBP
+    {
+        public string code { get; set; }
+        public string symbol { get; set; }
+        public string rate { get; set; }
+        public string description { get; set; }
+        public double rate_float { get; set; }
+    }
+
+    public class EUR
+    {
+        public string code { get; set; }
+        public string symbol { get; set; }
+        public string rate { get; set; }
+        public string description { get; set; }
+        public double rate_float { get; set; }
+    }
+
+    public class Bpi
+    {
+        public USD USD { get; set; }
+        public GBP GBP { get; set; }
+        public EUR EUR { get; set; }
+    }
+
+    public class BtcPrice
+    {
+        public Time time { get; set; }
+        public string disclaimer { get; set; }
+        public string chartName { get; set; }
+        public Bpi bpi { get; set; }
+    }
+
 }

@@ -4,9 +4,197 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModbusRecorder"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Modbus Recorder" Height="450" Width="800"
+        WindowState="Maximized">
+
+    <materialDesign:DialogHost
+        Identifier="RootDialog"
+        DialogTheme="Inherit"
+        SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
+
+        <materialDesign:DrawerHost
+            IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="220">
+                    <ToggleButton 
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                        DockPanel.Dock="Top"
+                        HorizontalAlignment="Right" 
+                        Margin="16"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+
+                    <TextBox 
+                        x:Name="DemoItemsSearchBox"
+                        Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                        DockPanel.Dock="Top"
+                        Margin="16, 4"
+                        Width="200"
+                        materialDesign:HintAssist.Hint="Kayıt Ara"
+                        materialDesign:HintAssist.IsFloating="True"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+                    <ListBox 
+                        Margin="0 16 0 16"
+                        SelectedItem="{Binding SelectedRegister, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        ItemsSource="{Binding RegisterList}"
+                        Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card
+                                    Background="#03a9f4"
+                                    Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                    Padding="0"
+                                    Width="200">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition
+                                                Height="Auto" />
+                                            <RowDefinition
+                                                Height="Auto" />
+                                            <RowDefinition
+                                                Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Margin="16 16 16 4"
+                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                            Text="{Binding Name}" />
+                                        <Separator
+                                            Grid.Row="1"
+                                            Style="{StaticResource MaterialDesignLightSeparator}" />
+                                        <TextBlock
+                                            Grid.Row="2"
+                                            Margin="16 0 16 8"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                            Text="March 19, 2016" />
+                                        <StackPanel
+                                            Grid.Row="2"
+                                            Orientation="Horizontal"
+                                            Margin="16 0 16 8"
+                                            HorizontalAlignment="Right">
+                                            <Button
+                                                HorizontalAlignment="Right"
+                                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                                Width="30"
+                                                Padding="2 0 2 0"
+                                                materialDesign:RippleAssist.IsCentered="True">
+                                                <materialDesign:PackIcon
+                                                    Kind="Phone" />
+                                            </Button>
+
+                                            <materialDesign:PopupBox
+                                                HorizontalAlignment="Right"
+                                               
+                                                Padding="2 0 2 0">
+                                                <StackPanel>
+                                                    <Button
+                                                        Content="More" />
+                                                    <Button
+                                                        Content="Options" />
+                                                </StackPanel>
+                                            </materialDesign:PopupBox>
+                                           
+                                        </StackPanel>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <DockPanel>
+                <materialDesign:ColorZone
+                    Padding="16"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    Mode="PrimaryMid"
+                    DockPanel.Dock="Top">
+                    <DockPanel>
+                        
+                        <ToggleButton
+                            x:Name="MenuToggleButton"
+                            Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                            IsChecked="False"
+                            Click="MenuToggleButton_OnClick"
+                            AutomationProperties.Name="HamburgerToggleButton"/>
+
+                        <materialDesign:PopupBox
+                            DockPanel.Dock="Right"
+                            PlacementMode="BottomAndAlignRightEdges"
+                            StaysOpen="False">
+
+                            <StackPanel>
+                                <Button Content="Kayıt Ekle" Click="AddRecordPopupButtonOnClick"/>
+                                <Button Content="Nice Popup" Click="MenuPopupButton_OnClick"/>
+                                <Button Content="Ayarlar" Click="SettingsButtonOnClick"/>
+                                <Button Content="Kapat" Click="ClosePopupButtonOnClick"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="22"
+                            AutomationProperties.Name="Material Design In XAML Toolkit"
+                            Text="Modbus Recorder"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding RegisterList}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card Width="250" Height="250" Padding="32" Margin="16">
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" 
+                                                   Text="{Binding Name}"
+                                                   Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+
+                                        <Button Grid.Row="1" Grid.Column="0"
+                                                Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Width="100"
+                                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                                Content="Başlat"/>
+
+                                        <Button Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"
+                                                Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Width="100"
+                                                ToolTip="Resource name: MaterialDesignRaisedButton"
+                                                Content="Durdur"/>
+
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>
