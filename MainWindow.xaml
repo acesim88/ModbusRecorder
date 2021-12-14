@@ -48,7 +48,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <materialDesign:Card
-                                    Background="#03a9f4"
+                                    Background="{DynamicResource Page.Background}"
                                     Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                                     Padding="0"
                                     Width="200">
@@ -115,6 +115,7 @@
 
             <DockPanel>
                 <materialDesign:ColorZone
+                    Background="{DynamicResource Page.Background}"
                     Padding="16"
                     materialDesign:ShadowAssist.ShadowDepth="Depth2"
                     Mode="PrimaryMid"

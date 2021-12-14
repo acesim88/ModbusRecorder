@@ -7,6 +7,20 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Yeni Kayıt Ekleme" Height="500" Width="500">
+
+    <Window.Resources>
+        <Style x:Key="IsCheckedStyle"
+            BasedOn="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"
+            TargetType="{x:Type CheckBox}">
+            <Setter Property="Content" Value="Alarm Pasif"/>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="Alarmı Aktif"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <materialDesign:Card Width="400" Height="400" Padding="32">
             <Grid>
@@ -67,22 +81,24 @@
                          FontSize="16"  />
 
                 <CheckBox Height="50"  Margin="5,0,0,0" Grid.Column="1" Grid.Row="3"
-                          Style="{DynamicResource MaterialDesignFilterChipPrimaryCheckBox}"
-                          IsChecked="{Binding IsAlertActivated,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                          Content="Alarmı Aktif Et" />
+                          Style="{DynamicResource IsCheckedStyle}"
+                          IsChecked="{Binding IsAlertActivated,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                </CheckBox>
 
                 <Button Grid.Column="0" Grid.Row="4" Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding MovePrevCommand}"
+                        Command="{Binding AddRecordCommand}"
                         Content="{materialDesign:PackIcon Kind=CheckBold, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"
+                        Background="{DynamicResource Page.Background}"
                         materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
                 <Button Grid.Column="1" Grid.Row="4"  Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding MoveNextCommand}"
+                        Command="{Binding CancelCommand}"
                         Content="{materialDesign:PackIcon Kind=CloseThick, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"
+                        Background="{DynamicResource Page.Background}"
                         materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
             </Grid>

@@ -6,7 +6,6 @@ namespace ModbusRecorder.ViewModel
 {
     public class AddRecordWindowViewModel:INotifyPropertyChanged
     {
-
         private bool _isAlertActivated;
 
         public bool IsAlertActivated
@@ -21,7 +20,7 @@ namespace ModbusRecorder.ViewModel
 
         public AddRecordWindowViewModel()
         {
-            IsAlertActivated = true;
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
