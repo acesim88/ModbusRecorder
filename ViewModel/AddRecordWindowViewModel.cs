@@ -1,11 +1,17 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 using ModbusRecorder.Annotations;
 
 namespace ModbusRecorder.ViewModel
 {
-    public class AddRecordWindowViewModel:INotifyPropertyChanged
+    public class AddRecordWindowViewModel : BaseViewModel, INotifyPropertyChanged
     {
+        public UserCommand AddRecordCommand { get; set; }
+
         private bool _isAlertActivated;
 
         public bool IsAlertActivated
@@ -20,7 +26,12 @@ namespace ModbusRecorder.ViewModel
 
         public AddRecordWindowViewModel()
         {
-            
+            AddRecordCommand = new UserCommand(OnAddRecordCommand);
+        }
+
+        private void OnAddRecordCommand(object obj)
+        {
+            MessageBox.Show(obj.ToString());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,5 +41,7 @@ namespace ModbusRecorder.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }

@@ -61,9 +61,11 @@ namespace ModbusRecorder
 
         private void AddRecordPopupButtonOnClick(object sender, RoutedEventArgs e)
         {
-            AddRecordWindow addRecordWindow = new AddRecordWindow();
-            addRecordWindow.DataContext = new AddRecordWindowViewModel();
-            addRecordWindow.Show();
+            AddRecordWindow view = new AddRecordWindow();
+            var viewNodel = new AddRecordWindowViewModel();
+            view.DataContext = viewNodel;
+            viewNodel.Init(view);
+            view.Show();
         }
 
         private void ClosePopupButtonOnClick(object sender, RoutedEventArgs e)
@@ -73,8 +75,11 @@ namespace ModbusRecorder
 
         private void SettingsButtonOnClick(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
+            SettingsWindow view = new SettingsWindow();
+            var viewNodel = new SettingsViewModel();
+            view.DataContext = viewNodel;
+            viewNodel.Init(view);
+            view.Show();
         }
     }
     public class Time

@@ -82,6 +82,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="UserCommand.cs" />
     <Compile Include="Register.cs" />
     <Compile Include="Injector.cs" />
     <Compile Include="Service\DbRecordService.cs" />
@@ -102,6 +104,7 @@
     </Compile>
     <Compile Include="ViewModel\AddRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Page Include="ColorResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

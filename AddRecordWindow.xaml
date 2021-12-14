@@ -86,7 +86,7 @@
                 </CheckBox>
 
                 <Button Grid.Column="0" Grid.Row="4" Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding AddRecordCommand}"
+                        Command="{Binding AddRecordCommand}" CommandParameter="Deneme"
                         Content="{materialDesign:PackIcon Kind=CheckBold, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"
@@ -94,7 +94,7 @@
                         materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
                 <Button Grid.Column="1" Grid.Row="4"  Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding CancelCommand}"
+                        Command="{Binding CloseCommand}"
                         Content="{materialDesign:PackIcon Kind=CloseThick, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"

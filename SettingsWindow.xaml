@@ -36,7 +36,7 @@
                     materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
                 <Button Grid.Row="1" Grid.Column="1" Height="32" Width="100"
-                        Command="{Binding MoveNextCommand}"
+                        Command="{Binding CloseCommand}"
                         Content="{materialDesign:PackIcon Kind=CloseThick, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"
