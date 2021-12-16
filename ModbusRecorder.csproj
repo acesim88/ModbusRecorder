@@ -83,6 +83,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Model\IDbModel.cs" />
+    <Compile Include="Model\RegisterRecordModel.cs" />
+    <Compile Include="Service\IRegisterRecordService.cs" />
+    <Compile Include="Service\RegisterRecordService.cs" />
     <Compile Include="UserCommand.cs" />
     <Compile Include="Register.cs" />
     <Compile Include="Injector.cs" />

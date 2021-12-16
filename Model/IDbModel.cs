@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModbusRecorder
+namespace ModbusRecorder.Model
 {
-    public interface IRestService
+    public interface IDbModel
     {
-        Task<T> GetData<T>(string url, string requestString);
+        string Name { get; set; }
     }
 }

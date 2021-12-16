@@ -16,10 +16,11 @@ namespace ModbusRecorder
         public static void InitializeReferences()
         {
             _container = new Container(Rules.Default.WithConcreteTypeDynamicRegistrations().WithoutThrowOnRegisteringDisposableTransient());
-         
+
             _container.Register<IDbRecordService, DbRecordService>(Reuse.Singleton);
             _container.Register<IModbusConnectionService, ModbusConnectionService>(Reuse.Singleton);
             _container.Register<IRestService, RestService>(Reuse.Singleton);
+            _container.Register<IRegisterRecordService, RegisterRecordService>(Reuse.Singleton);
         }
         public static TService GetInstance<TService>()
         {

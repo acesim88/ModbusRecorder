@@ -36,45 +36,46 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="0" Text="{Binding DeviceAdress}"
+                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="0" Text="{Binding DeviceAddress}" PreviewTextInput="NumberValidationTextBox"
                          materialDesign:HintAssist.Hint="Cihaz Adresi"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" Text="{Binding RegisterAddress}"
+                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" Text="{Binding RegisterAddress}" PreviewTextInput="NumberValidationTextBox"
                          materialDesign:HintAssist.Hint="Register Adresi"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="1" Text="{Binding RegisterType}"
-                         materialDesign:HintAssist.Hint="Register Tipi"
-                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-                         VerticalAlignment="Center" 
-                         FontSize="16"  />
+                <ComboBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding RegisterTypes}"
+                          SelectedItem="{Binding RegisterType}"
+                          materialDesign:HintAssist.Hint="Register Tipi"                         
+                          VerticalAlignment="Center" 
+                          FontSize="16"  IsEditable="True"/>
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding Name}"
+                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding RecordName}"
                          materialDesign:HintAssist.Hint="Kayıt Adı"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="2" Text="{Binding Description}"
+                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="2" Text="{Binding RecordDescription}"
                          materialDesign:HintAssist.Hint="Kayıt Açıklaması"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" Text="{Binding DownLimit}"
+                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" Text="{Binding DownLimit}" PreviewTextInput="NumberValidationTextBox"
                          materialDesign:HintAssist.Hint="Alarm Alt Limit"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="3" Text="{Binding UpLimit}"
+                <TextBox Height="50" Margin="5,0,0,0" Grid.Column="0" Grid.Row="3" Text="{Binding UpLimit}" PreviewTextInput="NumberValidationTextBox"
                          materialDesign:HintAssist.Hint="Alarm Üst Limit"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
@@ -86,11 +87,11 @@
                 </CheckBox>
 
                 <Button Grid.Column="0" Grid.Row="4" Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding AddRecordCommand}" CommandParameter="Deneme"
+                        Command="{Binding AddRecordCommand}"
                         Content="{materialDesign:PackIcon Kind=CheckBold, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"
-                        Background="{DynamicResource Page.Background}"
+                        Background="{DynamicResource Page.BlueColor}"
                         materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
                 <Button Grid.Column="1" Grid.Row="4"  Height="32" Width="100" Margin="5,0,0,0"
@@ -98,8 +99,11 @@
                         Content="{materialDesign:PackIcon Kind=CloseThick, Size=24}"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
                         Foreground="White"
-                        Background="{DynamicResource Page.Background}"
+                        Background="{DynamicResource Page.BlueColor}"
                         materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
+
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" 
+                           Foreground="{DynamicResource Page.BlueColor}" Text="{Binding RecordStatus}" />
 
             </Grid>
         </materialDesign:Card>

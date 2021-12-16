@@ -2,53 +2,77 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using LiteDB;
+using ModbusRecorder.Model;
 
 namespace ModbusRecorder.Service
 {
-    public class DbRecordService:IDbRecordService
+    public class DbRecordService : IDbRecordService
     {
-        public DbRecordService()
+        private readonly string _dbName;
+
+        public DbRecordService(string dbName)
         {
-            using(var db = new LiteDatabase(@"ModbusRecorder.db"))
+            _dbName = dbName;
+        }
+
+        public bool AddRecord(IDbModel dbModel)
+        {
+            try
             {
-                // Get customer collection
-                var col = db.GetCollection<Customer>("customers");
-                // Create your new customer instance
-                //var customer = new Customer
-                //{ 
-                //    Name = "Atakan Doe", 
-                //    Phones = new string[] { "8000-0000", "9000-0000" }, 
-                //    Age = 25,
-                //    IsActive = true
-                //};
+                using (var db = new LiteDatabase(@"ModbusRecorder.db"))
+                {
+                    var col = db.GetCollection<IDbModel>(_dbName);
+                    col.Insert(dbModel);
+                }
 
-                //// Create unique index in Name field
-                //col.EnsureIndex(x => x.Name, true);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
-                //// Insert new customer document (Id will be auto-incremented)
-                //col.Insert(customer);
+        public bool DeleteRecord(IDbModel dbModel)
+        {
+            try
+            {
+                using (var db = new LiteDatabase(@"ModbusRecorder.db"))
+                {
+                    var col = db.GetCollection<IDbModel>(_dbName);
+                    col.Delete(dbModel.Name);
+                }
 
-                // Update a document inside a collection
-                //customer.Name = "Joana Doe";
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
-                //col.Update(customer);
+        public bool ReadRecord(IDbModel dbModel)
+        {
+            throw new NotImplementedException();
+        }
 
-                // Use LINQ to query documents (with no index)
-                List<Customer> results = col.Find(x=>x.Age>20).ToList();
+        public List<IDbModel> GetRecords()
+        {
+            try
+            {
+                using (var db = new LiteDatabase(@"ModbusRecorder.db"))
+                {
+                    var col = db.GetCollection<IDbModel>(_dbName);
+                    return col.FindAll().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
             }
         }
     }
-
-    public class Customer
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string[] Phones { get; set; }
-        public bool IsActive { get; set; }
-    }
-
-   
 }

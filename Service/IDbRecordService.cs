@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Windows.Documents;
+using ModbusRecorder.Model;
+using Newtonsoft.Json.Bson;
 
 namespace ModbusRecorder.Service
 {
     public interface IDbRecordService
     {
-
+        bool AddRecord(IDbModel dbModel);
+        bool DeleteRecord(IDbModel dbModel);
+        bool ReadRecord(IDbModel dbModel);
+        List<IDbModel> GetRecords();
     }
 }

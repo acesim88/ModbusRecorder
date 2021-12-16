@@ -13,11 +13,11 @@ namespace ModbusRecorder
     {
         private int _deviceAdress;
         private int _registerAdress;
-        private int _registerType;
+        private string _registerType;
         private string _name;
         private string _description;
-        private decimal _downLimit;
-        private decimal _upLimit;
+        private double _downLimit;
+        private double _upLimit;
         private bool _isAlertActivated;
 
         public int DeviceAdress
@@ -40,7 +40,7 @@ namespace ModbusRecorder
             }
         }
 
-        public int RegisterType
+        public string RegisterType
         {
             get => _registerType;
             set
@@ -69,7 +69,7 @@ namespace ModbusRecorder
                 OnPropertyChanged();
             }
         }
-        public decimal DownLimit
+        public double DownLimit
         {
             get => _downLimit;
             set
@@ -79,7 +79,7 @@ namespace ModbusRecorder
             }
         }
         
-        public decimal UpLimit
+        public double UpLimit
         {
             get => _upLimit;
             set

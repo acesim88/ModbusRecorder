@@ -17,7 +17,6 @@ namespace ModbusRecorder
     {
         public MainWindow()
         {
-
             InitializeComponent();
 
             var viewModel = Injector.GetInstance<MainWindowViewModel>();
@@ -30,6 +29,7 @@ namespace ModbusRecorder
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await ((MainWindowViewModel)DataContext)?.GetBtc();
+            await ((MainWindowViewModel)DataContext)?.GetRegisters();
         }
 
         private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
@@ -62,7 +62,7 @@ namespace ModbusRecorder
         private void AddRecordPopupButtonOnClick(object sender, RoutedEventArgs e)
         {
             AddRecordWindow view = new AddRecordWindow();
-            var viewNodel = new AddRecordWindowViewModel();
+            var viewNodel = Injector.GetInstance<AddRecordWindowViewModel>();
             view.DataContext = viewNodel;
             viewNodel.Init(view);
             view.Show();

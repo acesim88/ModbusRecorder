@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 using ModbusRecorder.Annotations;
+using ModbusRecorder.Model;
 using ModbusRecorder.Service;
 
 namespace ModbusRecorder.ViewModel
@@ -16,28 +12,12 @@ namespace ModbusRecorder.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private IRestService _restService;
-        private IDbRecordService _dbRecordService;
+        private IRegisterRecordService _registerRecordService;
 
-        public MainWindowViewModel(IRestService restService, IDbRecordService dbRecordService)
+        public MainWindowViewModel(IRestService restService, IRegisterRecordService registerRecordService)
         {
             _restService = restService;
-            _dbRecordService = dbRecordService;
-
-            RegisterList = new ObservableCollection<Register>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                RegisterList.Add(new Register()
-                {
-                    DeviceAdress = i,
-                    RegisterAddress = i * 5,
-                    Name = i.ToString(),
-                    Description = "asdasda"
-                });
-            }
-
-            _demoItemsView = CollectionViewSource.GetDefaultView(RegisterList);
-            _demoItemsView.Filter = DemoItemsFilter;
+            _registerRecordService = registerRecordService;
         }
 
         private Register _selectedRegister;
@@ -62,7 +42,7 @@ namespace ModbusRecorder.ViewModel
             }
         }
 
-        private readonly ICollectionView _demoItemsView;
+        private ICollectionView _demoItemsView;
         private string _searchKeyword;
         public string SearchKeyword
         {
@@ -97,6 +77,32 @@ namespace ModbusRecorder.ViewModel
         public async Task GetBtc()
         {
             var tbcPrice = await _restService.GetData<BtcPrice>("https://api.coindesk.com", "v1/bpi/currentprice.json");
+        }
+
+        public async Task GetRegisters()
+        {
+            RegisterList = new ObservableCollection<Register>();
+
+            var records = await _registerRecordService.GetRegisterRecords();
+
+            foreach (var record in records)
+            {
+             RegisterList.Add(new Register()
+             {
+                 Name = record.Name,
+                 RegisterAddress = record.RegisterAddress,
+                 RegisterType = record.RegisterType,
+                 IsAlertActivated = record.IsAlertActivated,
+                 Description = record.RecordDescription,
+                 DeviceAdress = record.DeviceAddress,
+                 DownLimit = record.DownLimit,
+                 UpLimit = record.UpLimit,
+             });   
+            }
+
+            _demoItemsView = CollectionViewSource.GetDefaultView(RegisterList);
+
+            _demoItemsView.Filter = DemoItemsFilter;
         }
     }
 }
