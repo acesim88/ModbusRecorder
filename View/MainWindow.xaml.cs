@@ -72,6 +72,16 @@ namespace ModbusRecorder.View
             view.Show();
         }
 
+        private void ReportsButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            AddRecordWindow view = new AddRecordWindow();
+            var viewNodel = Injector.GetInstance<AddRecordWindowViewModel>();
+            viewNodel.Title = "Yeni Kayıt";
+            view.DataContext = viewNodel;
+            viewNodel.Init(view);
+            view.Show();
+        }
+
         private void ClosePopupButtonOnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

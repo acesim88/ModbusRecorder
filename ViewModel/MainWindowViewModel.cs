@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using ModbusRecorder.Annotations;
 using ModbusRecorder.Model;
@@ -187,6 +188,7 @@ namespace ModbusRecorder.ViewModel
                     DeviceAdress = record.DeviceAddress,
                     DownLimit = record.DownLimit,
                     UpLimit = record.UpLimit,
+                    AlertIconIsVisible = Visibility.Collapsed
                 });
             }
 

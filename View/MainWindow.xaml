@@ -7,7 +7,7 @@
         xmlns:utils="clr-namespace:ModbusRecorder.Utils"
         mc:Ignorable="d"
         Title="Modbus Recorder" Height="450" Width="800"
-        WindowState="Maximized">
+        WindowState="Maximized" >
 
     <Window.Resources>
         <utils:BindingProxy x:Key="ProxyElement" Data="{Binding}" />
@@ -153,6 +153,7 @@
 
                             <StackPanel>
                                 <Button Content="Kayıt Ekle" Click="AddRecordPopupButtonOnClick"/>
+                                <Button Content="Raporlar" Click="ReportsButtonOnClick"/>
                                 <!--<Button Content="Nice Popup" Click="MenuPopupButton_OnClick"/>-->
                                 <Button Content="Ayarlar" Click="SettingsButtonOnClick"/>
                                 <Button Content="Kapat" Click="ClosePopupButtonOnClick"/>
@@ -177,7 +178,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Width="250" Height="250" Padding="32" Margin="16">
+                                <materialDesign:Card Width="300" Height="250" Padding="32" Margin="16">
                                     <Grid>
 
                                         <Grid.ColumnDefinitions>
@@ -186,25 +187,76 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"></RowDefinition>
+                                            <RowDefinition Height="20"></RowDefinition>
+                                            <RowDefinition Height="20"></RowDefinition>
                                             <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="30"></RowDefinition>
                                         </Grid.RowDefinitions>
 
-                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" 
+                                        <TextBlock Grid.Row="0" Grid.Column="0" 
                                                    Text="{Binding Name}"
+                                                   FontSize="16"
+                                                   Foreground="{DynamicResource Page.BlueColor}"
+                                                   FontWeight="Bold"
                                                    Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
 
-                                        <Button Grid.Row="1" Grid.Column="0"
-                                                Style="{DynamicResource MaterialDesignFlatButton}"
-                                                Width="100"
-                                                ToolTip="Resource name: MaterialDesignRaisedButton"
-                                                Content="Başlat"/>
+                                        <materialDesign:PackIcon Grid.Row="0" Grid.Column="1"  Kind="Bell" HorizontalAlignment="Right" Height="30" Width="30"
+                                                                 Foreground="Red" Visibility="{Binding AlertIconIsVisible,UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <Button Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"
-                                                Style="{DynamicResource MaterialDesignFlatButton}"
-                                                Width="100"
-                                                ToolTip="Resource name: MaterialDesignRaisedButton"
-                                                Content="Durdur"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" 
+                                                   Text="Alt Limit"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="12"
+                                                   Foreground="{DynamicResource Page.BlueColor}"
+                                                   FontWeight="Bold"
+                                                   Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+
+                                        <TextBlock Grid.Row="1" Grid.Column="1" 
+                                                   Text="Üst Limit"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="12"
+                                                   Foreground="{DynamicResource Page.BlueColor}"
+                                                   FontWeight="Bold"
+                                                   Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+
+                                        <TextBlock Grid.Row="2" Grid.Column="0" 
+                                                   Text="{Binding DownLimit}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="16"
+                                                   Foreground="{DynamicResource Page.BlueColor}"
+                                                   FontWeight="Bold"
+                                                   Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+
+                                        <TextBlock Grid.Row="2" Grid.Column="1" 
+                                                   Text="{Binding UpLimit}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="16"
+                                                   Foreground="{DynamicResource Page.BlueColor}"
+                                                   FontWeight="Bold"
+                                                   Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+
+                                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" 
+                                                   Text="{Binding ProcessValue}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="60"
+                                                   Foreground="Tomato"
+                                                   FontWeight="Bold"
+                                                   Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
+
+
+                                        <Button Grid.Row="4" Grid.Column="0"
+                                                Style="{DynamicResource MaterialDesignFlatDarkButton}"
+                                                HorizontalAlignment="Center"
+                                                Foreground="{DynamicResource Page.BlueColor}"
+                                                Content="{materialDesign:PackIcon Play}"/>
+
+                                        <Button Grid.Row="4" Grid.Column="1" Margin="5,0,0,0"
+                                                Style="{DynamicResource MaterialDesignFlatDarkButton}"
+                                                Foreground="{DynamicResource Page.BlueColor}"
+                                                HorizontalAlignment="Center"
+                                                Content="{materialDesign:PackIcon Stop}"/>
 
                                     </Grid>
                                 </materialDesign:Card>

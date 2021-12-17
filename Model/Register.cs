@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ModbusRecorder.Annotations;
 
 namespace ModbusRecorder.Model
@@ -20,6 +21,9 @@ namespace ModbusRecorder.Model
         private double _downLimit;
         private double _upLimit;
         private bool _isAlertActivated;
+        private Visibility _alertIconIsVisible;
+        private double _processValue;
+        private bool _bitValue;
 
         public int DeviceAdress
         {
@@ -96,6 +100,36 @@ namespace ModbusRecorder.Model
             set
             {
                 _isAlertActivated = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility AlertIconIsVisible
+        {
+            get => _alertIconIsVisible;
+            set
+            {
+                _alertIconIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double ProcessValue 
+        {
+            get => _processValue;
+            set
+            {
+                _processValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool BitValue
+        {
+            get => _bitValue;
+            set
+            {
+                _bitValue = value;
                 OnPropertyChanged();
             }
         }

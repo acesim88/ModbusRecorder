@@ -22,7 +22,7 @@
     </Window.Resources>
 
     <Grid>
-        <Border Margin="32" BorderBrush="{DynamicResource Page.BlueColor}" BorderThickness="10" CornerRadius="10">
+        <Border Margin="32" BorderBrush="{DynamicResource Page.BlueColor}" BorderThickness="2">
             <materialDesign:Card Padding="32">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -86,24 +86,25 @@
                           IsChecked="{Binding IsAlertActivated,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     </CheckBox>
 
-                    <Button Grid.Column="0" Grid.Row="4" Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding AddRecordCommand}"
-                        Content="{materialDesign:PackIcon Kind=CheckBold, Size=24}"
-                        Style="{DynamicResource MaterialDesignRaisedButton}"
-                        Foreground="White"
-                        Background="{DynamicResource Page.BlueColor}"
-                        materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
+                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2"  Margin="5,20,0,0" Grid.Row="4" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" 
+                               Foreground="{DynamicResource Page.BlueColor}" Text="{Binding RecordStatus}" />
 
-                    <Button Grid.Column="1" Grid.Row="4"  Height="32" Width="100" Margin="5,0,0,0"
-                        Command="{Binding CloseCommand}"
-                        Content="{materialDesign:PackIcon Kind=CloseThick, Size=24}"
-                        Style="{DynamicResource MaterialDesignRaisedButton}"
-                        Foreground="White"
-                        Background="{DynamicResource Page.BlueColor}"
-                        materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
+                    <Button Grid.Column="0" Grid.Row="5" Height="32" Width="100" Margin="5,0,0,0"
+                            Command="{Binding AddRecordCommand}"
+                            Content="{materialDesign:PackIcon Kind=CheckBold, Size=24}"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            Foreground="White"
+                            Background="{DynamicResource Page.BlueColor}"
+                            materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
-                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" 
-                           Foreground="{DynamicResource Page.BlueColor}" Text="{Binding RecordStatus}" />
+                    <Button Grid.Column="1" Grid.Row="5"  Height="32" Width="100" Margin="5,0,0,0"
+                            Command="{Binding CloseCommand}"
+                            Content="{materialDesign:PackIcon Kind=CloseThick, Size=24}"
+                            Style="{DynamicResource MaterialDesignRaisedButton}"
+                            Foreground="White"
+                            Background="{DynamicResource Page.BlueColor}"
+                            materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
+
                 </Grid>
             </materialDesign:Card>
         </Border>
