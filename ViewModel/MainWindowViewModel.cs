@@ -1,11 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using ModbusRecorder.Annotations;
 using ModbusRecorder.Model;
 using ModbusRecorder.Service;
+using ModbusRecorder.Utils;
+using ModbusRecorder.View;
 
 namespace ModbusRecorder.ViewModel
 {
@@ -14,10 +17,96 @@ namespace ModbusRecorder.ViewModel
         private IRestService _restService;
         private IRegisterRecordService _registerRecordService;
 
+        public UserCommand DeleteRecordCommand { get; set; }
+        public UserCommand OpenRecordSettingsCommand { get; set; }
+
         public MainWindowViewModel(IRestService restService, IRegisterRecordService registerRecordService)
         {
             _restService = restService;
             _registerRecordService = registerRecordService;
+            _registerRecordService.RegisterRecordModelAdded += _registerRecordService_RegisterRecordModelAdded;
+            _registerRecordService.RegisterRecordModelUpdated += _registerRecordService_RegisterRecordModelUpdated;
+            _registerRecordService.RegisterRecordModelDeleted += _registerRecordService_RegisterRecordModelDeleted;
+
+            OpenRecordSettingsCommand = new UserCommand(OnOpenRecordSettingsCommand);
+            DeleteRecordCommand = new UserCommand(OnDeleteRecordCommand);
+        }
+
+        private void _registerRecordService_RegisterRecordModelAdded(object sender, RegisterRecordModel e)
+        {
+            RegisterList.Add(new Register()
+            {
+                Id = e.Id,
+                DeviceAdress = e.DeviceAddress,
+                RegisterAddress = e.RegisterAddress,
+                RegisterType = e.RegisterType,
+                Name = e.Name,
+                Description = e.RecordDescription,
+                DownLimit = e.DownLimit,
+                UpLimit = e.UpLimit,
+                IsAlertActivated = e.IsAlertActivated
+            });
+        }
+
+        private void _registerRecordService_RegisterRecordModelUpdated(object sender, RegisterRecordModel e)
+        {
+            var register = RegisterList.FirstOrDefault(x => x.Id == e.Id);
+
+            if (register != null)
+            {
+                register.DeviceAdress = e.DeviceAddress;
+                register.RegisterAddress = e.RegisterAddress;
+                register.RegisterType = e.RegisterType;
+                register.Name = e.Name;
+                register.Description = e.RecordDescription;
+                register.DownLimit = e.DownLimit;
+                register.UpLimit = e.UpLimit;
+                register.IsAlertActivated = e.IsAlertActivated;
+            }
+        }
+
+        private void _registerRecordService_RegisterRecordModelDeleted(object sender, RegisterRecordModel e)
+        {
+            var register = RegisterList.FirstOrDefault(x => x.Id == e.Id);
+            if (register != null)
+            {
+                RegisterList.Remove(register);
+            }
+        }
+
+        private void OnOpenRecordSettingsCommand(object obj)
+        {
+            if (obj is Register register)
+            {
+                AddRecordWindow view = new AddRecordWindow();
+                var viewNodel = Injector.GetInstance<AddRecordWindowViewModel>();
+                view.DataContext = viewNodel;
+
+                viewNodel.Id = register.Id;
+                viewNodel.DeviceAddress = register.DeviceAdress;
+                viewNodel.RegisterAddress = register.RegisterAddress;
+                viewNodel.RegisterType = register.RegisterType;
+                viewNodel.RecordName = register.Name;
+                viewNodel.RecordDescription = register.Description;
+                viewNodel.DownLimit = register.DownLimit;
+                viewNodel.UpLimit = register.UpLimit;
+                viewNodel.IsAlertActivated = register.IsAlertActivated;
+                viewNodel.IsUpdate = true;
+                viewNodel.Title = "Kayıt Güncelleme";
+
+                viewNodel.Init(view);
+                view.Show();
+            }
+        }
+
+        private void OnDeleteRecordCommand(object obj)
+        {
+            if (obj is Register register)
+            {
+                RegisterList.Remove(register);
+
+                Task.Run(() => _registerRecordService.DeleteRegisterRecord(register.Name));
+            }
         }
 
         private Register _selectedRegister;
@@ -87,17 +176,18 @@ namespace ModbusRecorder.ViewModel
 
             foreach (var record in records)
             {
-             RegisterList.Add(new Register()
-             {
-                 Name = record.Name,
-                 RegisterAddress = record.RegisterAddress,
-                 RegisterType = record.RegisterType,
-                 IsAlertActivated = record.IsAlertActivated,
-                 Description = record.RecordDescription,
-                 DeviceAdress = record.DeviceAddress,
-                 DownLimit = record.DownLimit,
-                 UpLimit = record.UpLimit,
-             });   
+                RegisterList.Add(new Register()
+                {
+                    Id = record.Id,
+                    Name = record.Name,
+                    RegisterAddress = record.RegisterAddress,
+                    RegisterType = record.RegisterType,
+                    IsAlertActivated = record.IsAlertActivated,
+                    Description = record.RecordDescription,
+                    DeviceAdress = record.DeviceAddress,
+                    DownLimit = record.DownLimit,
+                    UpLimit = record.UpLimit,
+                });
             }
 
             _demoItemsView = CollectionViewSource.GetDefaultView(RegisterList);

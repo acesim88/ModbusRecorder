@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DryIoc;
-using Example;
+﻿using DryIoc;
 using ModbusRecorder.Service;
 
-namespace ModbusRecorder
+namespace ModbusRecorder.Utils
 {
     public static class Injector
     {

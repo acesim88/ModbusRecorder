@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ModbusRecorder
+namespace ModbusRecorder.Utils
 {
     public class UserCommand:ICommand
     {

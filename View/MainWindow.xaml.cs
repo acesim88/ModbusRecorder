@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
+using ModbusRecorder.Utils;
 using ModbusRecorder.ViewModel;
 
-namespace ModbusRecorder
+namespace ModbusRecorder.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,8 +28,11 @@ namespace ModbusRecorder
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            await ((MainWindowViewModel)DataContext)?.GetBtc();
-            await ((MainWindowViewModel)DataContext)?.GetRegisters();
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                ((MainWindowViewModel)DataContext)?.GetBtc();
+                ((MainWindowViewModel)DataContext)?.GetRegisters();
+            });
         }
 
         private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)
@@ -63,6 +66,7 @@ namespace ModbusRecorder
         {
             AddRecordWindow view = new AddRecordWindow();
             var viewNodel = Injector.GetInstance<AddRecordWindowViewModel>();
+            viewNodel.Title = "Yeni Kayıt";
             view.DataContext = viewNodel;
             viewNodel.Init(view);
             view.Show();

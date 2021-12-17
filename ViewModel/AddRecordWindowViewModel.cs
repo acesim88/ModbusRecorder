@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using ModbusRecorder.Annotations;
 using ModbusRecorder.Model;
 using ModbusRecorder.Service;
+using ModbusRecorder.Utils;
 
 namespace ModbusRecorder.ViewModel
 {
@@ -15,6 +14,9 @@ namespace ModbusRecorder.ViewModel
         private readonly IRegisterRecordService _registerRecordService;
 
         public UserCommand AddRecordCommand { get; set; }
+
+        public bool IsUpdate = false;
+        public int Id = 0;
 
         private int _deviceAddress;
         private int _registerAddress;
@@ -26,6 +28,7 @@ namespace ModbusRecorder.ViewModel
         private double _downLimit;
         private double _upLimit;
         private string _recordStatus;
+        private string _title;
 
         public int DeviceAddress
         {
@@ -127,6 +130,16 @@ namespace ModbusRecorder.ViewModel
             }
         }
 
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
+
         public AddRecordWindowViewModel(IRegisterRecordService registerRecordService)
         {
             _registerRecordService = registerRecordService;
@@ -145,8 +158,9 @@ namespace ModbusRecorder.ViewModel
         {
             try
             {
-                var status = _registerRecordService.AddRegisterRecord(new RegisterRecordModel()
+                _registerRecordService.AddRegisterRecord(new RegisterRecordModel()
                 {
+                    Id = Id,
                     DeviceAddress = DeviceAddress,
                     RegisterAddress = RegisterAddress,
                     RegisterType = RegisterType,
@@ -156,11 +170,12 @@ namespace ModbusRecorder.ViewModel
                     UpLimit = UpLimit,
                     IsAlertActivated = IsAlertActivated
                 });
-                RecordStatus = status ? "Kayıt yapıldı." : "Kayıt yapılamadı.";
+
+                RecordStatus = !IsUpdate ? "Kayıt yapıldı." : "Kayıt güncellendi.";
             }
             catch (Exception e)
             {
-                RecordStatus = "Kayıt yapılamadı.";
+                RecordStatus = !IsUpdate ? "Kayıt yapılamadı." : "Kayıt güncellenemedi.";
             }
         }
 

@@ -4,6 +4,7 @@ namespace ModbusRecorder.Model
 {
     public class RegisterRecordModel:IDbModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int DeviceAddress { get; set; }
         public int RegisterAddress{ get; set; }

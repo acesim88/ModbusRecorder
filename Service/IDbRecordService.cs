@@ -8,7 +8,7 @@ namespace ModbusRecorder.Service
     public interface IDbRecordService
     {
         bool AddRecord(IDbModel dbModel);
-        bool DeleteRecord(IDbModel dbModel);
+        void DeleteRecord(IDbModel dbModel);
         bool ReadRecord(IDbModel dbModel);
         List<IDbModel> GetRecords();
     }

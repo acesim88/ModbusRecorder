@@ -9,8 +9,12 @@ namespace ModbusRecorder.Service
 {
     public interface IRegisterRecordService
     {
-        bool AddRegisterRecord(RegisterRecordModel registerRecordModel);
-        bool DeleteRegisterRecord(RegisterRecordModel registerRecordModel);
+        event EventHandler<RegisterRecordModel> RegisterRecordModelAdded;
+        event EventHandler<RegisterRecordModel> RegisterRecordModelUpdated;
+        event EventHandler<RegisterRecordModel> RegisterRecordModelDeleted;
+
+        void AddRegisterRecord(RegisterRecordModel registerRecordModel);
+        Task DeleteRegisterRecord(string recordName);
         RegisterRecordModel ReadRegisterRecord(string recordName);
         Task<List<RegisterRecordModel>> GetRegisterRecords();
     }

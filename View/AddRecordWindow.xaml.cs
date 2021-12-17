@@ -1,10 +1,9 @@
 ﻿using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ModbusRecorder
+namespace ModbusRecorder.View
 {
     /// <summary>
     /// Interaction logic for AddRecordsWindow.xaml

@@ -26,6 +26,7 @@ namespace ModbusRecorder.Service
                 {
                     var col = db.GetCollection<IDbModel>(_dbName);
                     col.Insert(dbModel);
+                    col.EnsureIndex(x => x.Id);
                 }
 
                 return true;
@@ -36,14 +37,14 @@ namespace ModbusRecorder.Service
             }
         }
 
-        public bool DeleteRecord(IDbModel dbModel)
+        public bool UpdateRecord(IDbModel dbModel)
         {
             try
             {
                 using (var db = new LiteDatabase(@"ModbusRecorder.db"))
                 {
                     var col = db.GetCollection<IDbModel>(_dbName);
-                    col.Delete(dbModel.Name);
+                    col.Update(dbModel);
                 }
 
                 return true;
@@ -51,6 +52,22 @@ namespace ModbusRecorder.Service
             catch (Exception e)
             {
                 return false;
+            }
+        }
+
+        public void DeleteRecord(IDbModel dbModel)
+        {
+            try
+            {
+                using (var db = new LiteDatabase(@"ModbusRecorder.db"))
+                {
+                    var col = db.GetCollection<IDbModel>(_dbName);
+                    col.Delete(dbModel.Id);
+                }
+            }
+            catch (Exception e)
+            {
+
             }
         }
 

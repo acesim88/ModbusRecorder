@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ModbusRecorder.Annotations;
 
-namespace ModbusRecorder
+namespace ModbusRecorder.Model
 {
     public class Register:INotifyPropertyChanged
     {
+        public int Id { get; set; }
         private int _deviceAdress;
         private int _registerAdress;
         private string _registerType;

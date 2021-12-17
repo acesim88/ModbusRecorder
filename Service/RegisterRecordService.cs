@@ -16,29 +16,49 @@ namespace ModbusRecorder.Service
 
         }
 
-        public bool AddRegisterRecord(RegisterRecordModel registerRecordModel)
+        public event EventHandler<RegisterRecordModel> RegisterRecordModelAdded;
+        public event EventHandler<RegisterRecordModel> RegisterRecordModelUpdated;
+        public event EventHandler<RegisterRecordModel> RegisterRecordModelDeleted;
+
+        public void AddRegisterRecord(RegisterRecordModel registerRecordModel)
         {
-            if (_registerRecordModels.Any(x => x.Name == registerRecordModel.Name))
+            if (registerRecordModel.Id != 0)
             {
-                return false;
+                var register = _registerRecordModels.FirstOrDefault(x => x.Id == registerRecordModel.Id);
+                if (register != null)
+                {
+                    register.DeviceAddress = registerRecordModel.DeviceAddress;
+                    register.RegisterAddress = registerRecordModel.RegisterAddress;
+                    register.RegisterType = registerRecordModel.RegisterType;
+                    register.Name = registerRecordModel.Name;
+                    register.RecordDescription = registerRecordModel.RecordDescription;
+                    register.DownLimit = registerRecordModel.DownLimit;
+                    register.UpLimit = registerRecordModel.UpLimit;
+                    register.IsAlertActivated = registerRecordModel.IsAlertActivated;
+                    
+                    UpdateRecord(register);
+
+                    RegisterRecordModelUpdated?.Invoke(this, register);
+                }
             }
             else
             {
                 _registerRecordModels.Add(registerRecordModel);
-                return AddRecord(registerRecordModel);
+                AddRecord(registerRecordModel);
+
+                RegisterRecordModelAdded?.Invoke(this, registerRecordModel);
             }
         }
 
-        public bool DeleteRegisterRecord(RegisterRecordModel registerRecordModel)
+        public async Task DeleteRegisterRecord(string recordName)
         {
-            if (_registerRecordModels.Any(x => x.Name == registerRecordModel.Name))
+            if (_registerRecordModels.Any(x => x.Name == recordName))
             {
-                _registerRecordModels.Remove(_registerRecordModels.FirstOrDefault(x => x.Name == registerRecordModel.Name));
-                return DeleteRecord(registerRecordModel);
-            }
-            else
-            {
-                return false;
+                RegisterRecordModel registerRecordModel = _registerRecordModels.FirstOrDefault(x => x.Name == recordName);
+                _registerRecordModels.Remove(registerRecordModel);
+                await Task.Run(() => DeleteRecord(registerRecordModel));
+
+                RegisterRecordModelDeleted?.Invoke(this, registerRecordModel);
             }
         }
 

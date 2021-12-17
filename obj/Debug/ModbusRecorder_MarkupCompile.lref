@@ -1,7 +1,7 @@
 ﻿
-FC:\ModbusRecorder\ModbusRecorder\App.xaml;;
-FC:\ModbusRecorder\ModbusRecorder\MainWindow.xaml;;
+
+FC:\ModbusRecorder\ModbusRecorder\View\MainWindow.xaml;;
 FC:\ModbusRecorder\ModbusRecorder\SampleMessageDialog.xaml;;
-FC:\ModbusRecorder\ModbusRecorder\AddRecordWindow.xaml;;
-FC:\ModbusRecorder\ModbusRecorder\SettingsWindow.xaml;;
+FC:\ModbusRecorder\ModbusRecorder\View\AddRecordWindow.xaml;;
+FC:\ModbusRecorder\ModbusRecorder\View\SettingsWindow.xaml;;
 

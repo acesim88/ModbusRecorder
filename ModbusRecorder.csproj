@@ -82,14 +82,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Utils\BaseViewModel.cs" />
+    <Compile Include="Utils\BindingProxy.cs" />
     <Compile Include="Model\IDbModel.cs" />
     <Compile Include="Model\RegisterRecordModel.cs" />
     <Compile Include="Service\IRegisterRecordService.cs" />
     <Compile Include="Service\RegisterRecordService.cs" />
-    <Compile Include="UserCommand.cs" />
-    <Compile Include="Register.cs" />
-    <Compile Include="Injector.cs" />
+    <Compile Include="Utils\UserCommand.cs" />
+    <Compile Include="Model\Register.cs" />
+    <Compile Include="Utils\Injector.cs" />
     <Compile Include="Service\DbRecordService.cs" />
     <Compile Include="Service\IDbRecordService.cs" />
     <Compile Include="Service\IModbusConnectionService.cs" />
@@ -100,20 +101,20 @@
     <Compile Include="SampleMessageDialog.xaml.cs">
       <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddRecordWindow.xaml.cs">
+    <Compile Include="View\AddRecordWindow.xaml.cs">
       <DependentUpon>AddRecordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsWindow.xaml.cs">
+    <Compile Include="View\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddRecordWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Page Include="ColorResource.xaml">
+    <Page Include="Utils\ColorResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -121,7 +122,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -129,11 +130,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddRecordWindow.xaml">
+    <Page Include="View\AddRecordWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingsWindow.xaml">
+    <Page Include="View\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

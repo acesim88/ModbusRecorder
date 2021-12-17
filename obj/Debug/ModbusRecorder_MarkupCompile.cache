@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\ModbusRecorder\ModbusRecorder\App.xaml
-5231198353
+5-259528266
 
-26-170733651
+27-711966290
 1271219169877
-ColorResource.xaml;MainWindow.xaml;SampleMessageDialog.xaml;AddRecordWindow.xaml;SettingsWindow.xaml;
+Utils\ColorResource.xaml;View\MainWindow.xaml;SampleMessageDialog.xaml;View\AddRecordWindow.xaml;View\SettingsWindow.xaml;
 
 False
 
