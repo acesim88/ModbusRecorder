@@ -45,7 +45,7 @@
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                    <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="0" Text="{Binding RegisterAddress}" PreviewTextInput="NumberValidationTextBox"
+                    <TextBox Height="50" Margin="20,0,0,0" Grid.Column="1" Grid.Row="0" Text="{Binding RegisterAddress}" PreviewTextInput="NumberValidationTextBox"
                          materialDesign:HintAssist.Hint="Register Adresi"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
@@ -57,7 +57,7 @@
                           VerticalAlignment="Center" 
                           FontSize="16"  IsEditable="True"/>
 
-                    <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding RecordName}"
+                    <TextBox Height="50" Margin="20,0,0,0" Grid.Column="1" Grid.Row="1" Text="{Binding RecordName}"
                          materialDesign:HintAssist.Hint="Kayıt Adı"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
@@ -69,7 +69,7 @@
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                    <TextBox Height="50" Margin="5,0,0,0" Grid.Column="1" Grid.Row="2" Text="{Binding DownLimit}" PreviewTextInput="NumberValidationTextBox"
+                    <TextBox Height="50" Margin="20,0,0,0" Grid.Column="1" Grid.Row="2" Text="{Binding DownLimit}" PreviewTextInput="NumberValidationTextBox"
                          materialDesign:HintAssist.Hint="Alarm Alt Limit"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                          VerticalAlignment="Center" 
@@ -81,7 +81,7 @@
                          VerticalAlignment="Center" 
                          FontSize="16"  />
 
-                    <CheckBox Height="50"  Margin="5,0,0,0" Grid.Column="1" Grid.Row="3"
+                    <CheckBox Height="50"  Margin="20,0,0,0" Grid.Column="1" Grid.Row="3"
                           Style="{DynamicResource IsCheckedStyle}"
                           IsChecked="{Binding IsAlertActivated,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     </CheckBox>
