@@ -18,6 +18,12 @@ namespace ModbusRecorder.Utils
         private void OnCloseCommand(object obj)
         {
             _window.Close();
+            OnDispose();
+        }
+
+        public virtual void OnDispose()
+        {
+
         }
     }
 }

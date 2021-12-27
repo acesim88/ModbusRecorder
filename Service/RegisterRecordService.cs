@@ -75,9 +75,12 @@ namespace ModbusRecorder.Service
 
                 var records = await Task.Run(GetRecords);
 
-                foreach (var record in records)
+                if (records != null)
                 {
-                    _registerRecordModels.Add((RegisterRecordModel)record);
+                    foreach (var record in records)
+                    {
+                        _registerRecordModels.Add((RegisterRecordModel)record);
+                    }
                 }
             }
 

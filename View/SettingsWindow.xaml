@@ -61,7 +61,7 @@
                  
 
                     <Button Grid.Row="3" Grid.Column="0" Height="32" Width="100"
-                            Command="{Binding MovePrevCommand}"
+                            Command="{Binding SaveRecordCommand}"
                             Content="{materialDesign:PackIcon Kind=CheckBold, Size=24}"
                             Style="{DynamicResource MaterialDesignRaisedButton}"
                             Foreground="White"

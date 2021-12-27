@@ -15,6 +15,7 @@ namespace ModbusRecorder.Utils
             _container.Register<IModbusConnectionService, ModbusConnectionService>(Reuse.Singleton);
             _container.Register<IRestService, RestService>(Reuse.Singleton);
             _container.Register<IRegisterRecordService, RegisterRecordService>(Reuse.Singleton);
+            _container.Register<ISettingsRecordService, SettingsRecordService>(Reuse.Singleton);
         }
         public static TService GetInstance<TService>()
         {

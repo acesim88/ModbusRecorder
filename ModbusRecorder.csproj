@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\SettingsRecordModel.cs" />
+    <Compile Include="Service\ISettingsRecordService.cs" />
+    <Compile Include="Service\SettingsRecordService.cs" />
     <Compile Include="Utils\BaseViewModel.cs" />
     <Compile Include="Utils\BindingProxy.cs" />
     <Compile Include="Model\IDbModel.cs" />

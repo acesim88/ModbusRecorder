@@ -17,20 +17,51 @@ namespace ModbusRecorder.ViewModel
     {
         private IRestService _restService;
         private IRegisterRecordService _registerRecordService;
+        private ISettingsRecordService _settingsRecordService;
 
         public UserCommand DeleteRecordCommand { get; set; }
         public UserCommand OpenRecordSettingsCommand { get; set; }
 
-        public MainWindowViewModel(IRestService restService, IRegisterRecordService registerRecordService)
+        public MainWindowViewModel(IRestService restService, IRegisterRecordService registerRecordService, ISettingsRecordService settingsRecordService)
         {
             _restService = restService;
             _registerRecordService = registerRecordService;
+            _settingsRecordService = settingsRecordService;
+
             _registerRecordService.RegisterRecordModelAdded += _registerRecordService_RegisterRecordModelAdded;
             _registerRecordService.RegisterRecordModelUpdated += _registerRecordService_RegisterRecordModelUpdated;
             _registerRecordService.RegisterRecordModelDeleted += _registerRecordService_RegisterRecordModelDeleted;
 
+            _settingsRecordService.SettingsRecordModelAdded += _settingsRecordService_SettingsRecordModelAdded;
+            _settingsRecordService.SettingsRecordModelUpdated += _settingsRecordService_SettingsRecordModelUpdated;
+
             OpenRecordSettingsCommand = new UserCommand(OnOpenRecordSettingsCommand);
             DeleteRecordCommand = new UserCommand(OnDeleteRecordCommand);
+        }
+
+        private void _settingsRecordService_SettingsRecordModelAdded(object sender, SettingsRecordModel e)
+        {
+            UpdateSettings(e);
+        }
+
+        private void _settingsRecordService_SettingsRecordModelUpdated(object sender, SettingsRecordModel e)
+        {
+            UpdateSettings(e);
+        }
+
+        private void UpdateSettings(SettingsRecordModel settingsRecordModel)
+        {
+            _settings = new SettingsRecordModel()
+            {
+                Id = settingsRecordModel.Id,
+                Name = settingsRecordModel.Name,
+                Baudrate = settingsRecordModel.Baudrate,
+                Databits = settingsRecordModel.Databits,
+                PortName = settingsRecordModel.PortName,
+                Parity = settingsRecordModel.Parity,
+                Period = settingsRecordModel.Period,
+                Stopbits = settingsRecordModel.Stopbits
+            };
         }
 
         private void _registerRecordService_RegisterRecordModelAdded(object sender, RegisterRecordModel e)
@@ -156,6 +187,8 @@ namespace ModbusRecorder.ViewModel
             return obj is Register item && item.Name.ToLower().Contains(_searchKeyword.ToLower());
         }
 
+        private SettingsRecordModel _settings;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -195,6 +228,11 @@ namespace ModbusRecorder.ViewModel
             _demoItemsView = CollectionViewSource.GetDefaultView(RegisterList);
 
             _demoItemsView.Filter = DemoItemsFilter;
+        }
+
+        public async Task GetSettings()
+        {
+            _settings = await _settingsRecordService.GetSettingsRecord();
         }
     }
 }

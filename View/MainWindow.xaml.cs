@@ -32,6 +32,7 @@ namespace ModbusRecorder.View
             {
                 ((MainWindowViewModel)DataContext)?.GetBtc();
                 ((MainWindowViewModel)DataContext)?.GetRegisters();
+                ((MainWindowViewModel)DataContext)?.GetSettings();
             });
         }
 
@@ -90,7 +91,7 @@ namespace ModbusRecorder.View
         private void SettingsButtonOnClick(object sender, RoutedEventArgs e)
         {
             SettingsWindow view = new SettingsWindow();
-            var viewNodel = new SettingsViewModel();
+            var viewNodel = Injector.GetInstance<SettingsViewModel>();
             view.DataContext = viewNodel;
             viewNodel.Init(view);
             view.Show();
