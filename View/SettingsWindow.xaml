@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ModbusRecorder"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Settings" Height="500" Width="500">
+        Title="Ayarlar" Height="500" Width="500">
     <Grid>
         <Border Margin="32" BorderBrush="{DynamicResource Page.BlueColor}" BorderThickness="2">
             <materialDesign:Card Padding="32">
