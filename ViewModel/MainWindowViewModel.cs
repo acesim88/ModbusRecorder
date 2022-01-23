@@ -15,9 +15,9 @@ namespace ModbusRecorder.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private IRestService _restService;
-        private IRegisterRecordService _registerRecordService;
-        private ISettingsRecordService _settingsRecordService;
+        private readonly IRestService _restService;
+        private readonly IRegisterRecordService _registerRecordService;
+        private readonly ISettingsRecordService _settingsRecordService;
 
         public UserCommand DeleteRecordCommand { get; set; }
         public UserCommand OpenRecordSettingsCommand { get; set; }

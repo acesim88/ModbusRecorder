@@ -1,6 +1,7 @@
 ﻿using System.Windows;
+using ModbusRecorder.Utils;
 
-namespace ModbusRecorder.Utils
+namespace ModbusRecorder.ViewModel
 {
     public class BaseViewModel
     {

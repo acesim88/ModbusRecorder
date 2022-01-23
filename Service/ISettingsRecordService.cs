@@ -12,7 +12,7 @@ namespace ModbusRecorder.Service
         event EventHandler<SettingsRecordModel> SettingsRecordModelAdded;
         event EventHandler<SettingsRecordModel> SettingsRecordModelUpdated;
 
-        void SaveSettingsRecord(SettingsRecordModel settingsRecordService);
+        Task SaveSettingsRecord(SettingsRecordModel settingsRecordService);
         Task<SettingsRecordModel> GetSettingsRecord();
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ModbusRecorder"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        Icon="..\icons8-settings-50.png"
         Title="Ayarlar" Height="500" Width="500">
     <Grid>
         <Border Margin="32" BorderBrush="{DynamicResource Page.BlueColor}" BorderThickness="2">
@@ -24,41 +25,46 @@
                     </Grid.RowDefinitions>
 
                     <ComboBox Grid.Row="0" Grid.Column="0" Height="50" Margin="5,0,0,0"   ItemsSource="{Binding Connections}"
-                              SelectedItem="{Binding SelectedConnection}"
+                              SelectedItem="{Binding SelectedConnection,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               materialDesign:HintAssist.Hint="COM Ports"                         
+                              ToolTip="COM Ports"                         
                               VerticalAlignment="Center" 
                               FontSize="16"  IsEditable="True"/>
                    
                     <ComboBox Grid.Row="0" Grid.Column="1" Height="50" Margin="20,0,0,0"   ItemsSource="{Binding Baudrates}"
-                              SelectedItem="{Binding SelectedBaudrate}"
+                              SelectedItem="{Binding SelectedBaudrate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               materialDesign:HintAssist.Hint="Baud rate"                         
+                              ToolTip="Baud rate"                         
                               VerticalAlignment="Center" 
                               FontSize="16"  IsEditable="True"/>
 
                     <ComboBox Grid.Row="1" Grid.Column="0" Height="50" Margin="5,0,0,0"   ItemsSource="{Binding DataBits}"
-                              SelectedItem="{Binding SelectedDataBit}"
-                              materialDesign:HintAssist.Hint="Data bits"                         
+                              SelectedItem="{Binding SelectedDataBit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              materialDesign:HintAssist.Hint="Data bits"    
+                              ToolTip="Data bits"  
                               VerticalAlignment="Center" 
                               FontSize="16"  IsEditable="True"/>
 
                     <ComboBox Grid.Row="1" Grid.Column="1" Height="50" Margin="20,0,0,0"   ItemsSource="{Binding Parity}"
-                              SelectedItem="{Binding SelectedParity}"
-                              materialDesign:HintAssist.Hint="Parity"                         
+                              SelectedItem="{Binding SelectedParity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              materialDesign:HintAssist.Hint="Parity"   
+                              ToolTip="Parity" 
                               VerticalAlignment="Center" 
                               FontSize="16"  IsEditable="True"/>
 
                     <ComboBox Grid.Row="2" Grid.Column="0" Height="50" Margin="5,0,0,0"   ItemsSource="{Binding StopBits}"
-                              SelectedItem="{Binding SelectedStopBit}"
-                              materialDesign:HintAssist.Hint="Stop bits"                         
+                              SelectedItem="{Binding SelectedStopBit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              materialDesign:HintAssist.Hint="Stop bits"     
+                              ToolTip="Stop bits"   
                               VerticalAlignment="Center" 
                               FontSize="16"  IsEditable="True"/>
 
                     <ComboBox Grid.Row="2" Grid.Column="1" Height="50" Margin="20,0,0,0"   ItemsSource="{Binding Periods}"
-                              SelectedItem="{Binding SelectedPeriod}"
-                              materialDesign:HintAssist.Hint="Periyot"                         
+                              SelectedItem="{Binding SelectedPeriod,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              materialDesign:HintAssist.Hint="Periyot"      
+                              ToolTip="Periyot"              
                               VerticalAlignment="Center" 
                               FontSize="16"  IsEditable="True"/>
-                 
 
                     <Button Grid.Row="3" Grid.Column="0" Height="32" Width="100"
                             Command="{Binding SaveRecordCommand}"

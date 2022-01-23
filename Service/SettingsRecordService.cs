@@ -20,7 +20,7 @@ namespace ModbusRecorder.Service
         public event EventHandler<SettingsRecordModel> SettingsRecordModelAdded;
         public event EventHandler<SettingsRecordModel> SettingsRecordModelUpdated;
 
-        public async void SaveSettingsRecord(SettingsRecordModel settingsRecordModel)
+        public async Task SaveSettingsRecord(SettingsRecordModel settingsRecordModel)
         {
             if (settingsRecordModel.Id != 0)
             {

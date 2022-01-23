@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -95,6 +96,16 @@ namespace ModbusRecorder.View
             view.DataContext = viewNodel;
             viewNodel.Init(view);
             view.Show();
+        }
+
+        private void ConnectButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.linkedin.com/in/atakancesim/");
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
     public class Time

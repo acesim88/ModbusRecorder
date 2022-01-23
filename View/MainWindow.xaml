@@ -7,7 +7,9 @@
         xmlns:utils="clr-namespace:ModbusRecorder.Utils"
         mc:Ignorable="d"
         Title="Modbus Recorder" Height="450" Width="800"
-        WindowState="Maximized" >
+        Icon="..\icons8-monitor-50.png"
+        WindowState="Maximized" 
+        Closing="MainWindow_OnClosing">
 
     <Window.Resources>
         <utils:BindingProxy x:Key="ProxyElement" Data="{Binding}" />
@@ -152,11 +154,43 @@
                             StaysOpen="False">
 
                             <StackPanel>
-                                <Button Content="Kayıt Ekle" Click="AddRecordPopupButtonOnClick"/>
-                                <Button Content="Raporlar" Click="ReportsButtonOnClick"/>
-                                <!--<Button Content="Nice Popup" Click="MenuPopupButton_OnClick"/>-->
-                                <Button Content="Ayarlar" Click="SettingsButtonOnClick"/>
-                                <Button Content="Kapat" Click="ClosePopupButtonOnClick"/>
+
+                                <Button Click="AddRecordPopupButtonOnClick">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Image Source="..\icons8-add-file-50.png" Height="20" Width="24" ></Image>
+                                            <TextBlock Margin="5,0,0,0"  Text="Kayıt Ekle" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
+                                <Button Click="ReportsButtonOnClick">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Image Source="..\icons8-database-50.png" Height="20" Width="24" ></Image>
+                                            <TextBlock Margin="5,0,0,0"  Text="Raporlar" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
+                                <Button Click="SettingsButtonOnClick">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Image Source="..\icons8-settings-50.png" Height="20" Width="24" ></Image>
+                                            <TextBlock Margin="5,0,0,0"  Text="Ayarlar" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
+                                <Button Click="ClosePopupButtonOnClick">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Image Source="..\icons8-close-50.png" Height="20" Width="24" ></Image>
+                                            <TextBlock Margin="5,0,0,0"  Text="Kapat" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
                             </StackPanel>
                         </materialDesign:PopupBox>
 
@@ -265,13 +299,15 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <TextBlock Text="info@modbusrecorder.com" 
+                <TextBlock Text="iletişim" 
                            FontSize="16"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Bottom"    
                            Margin="0,0,10,10"
                            Foreground="{DynamicResource Page.BlueColor}"
-                           Background="Transparent"/>
+                           Background="Transparent" 
+                           MouseLeftButtonUp="ConnectButtonOnClick"
+                           ToolTip="https://www.linkedin.com/in/atakancesim/"/>
 
             </DockPanel>
         </materialDesign:DrawerHost>

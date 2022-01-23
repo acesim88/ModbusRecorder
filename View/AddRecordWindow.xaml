@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModbusRecorder"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="500" Width="500">
+        Title="{Binding Title}" Height="500" Width="500"
+        Icon="..\icons8-add-file-50.png"
+        >
 
     <Window.Resources>
         <Style x:Key="IsCheckedStyle"
@@ -23,7 +26,7 @@
 
     <Grid>
         <Border Margin="32" BorderBrush="{DynamicResource Page.BlueColor}" BorderThickness="2">
-            <materialDesign:Card Padding="32">
+            <wpf:Card Padding="32">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -106,7 +109,7 @@
                             materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"/>
 
                 </Grid>
-            </materialDesign:Card>
+            </wpf:Card>
         </Border>
     </Grid>
 </Window>
