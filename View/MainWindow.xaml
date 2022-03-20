@@ -236,7 +236,7 @@
                                                    Style="{DynamicResource MaterialDesignTitleTextBlock}"/>
 
                                         <materialDesign:PackIcon Grid.Row="0" Grid.Column="1"  Kind="Bell" HorizontalAlignment="Right" Height="30" Width="30"
-                                                                 Foreground="Red" Visibility="{Binding AlertIconIsVisible,UpdateSourceTrigger=PropertyChanged}"/>
+                                                                 Foreground="DarkRed" Visibility="{Binding AlertIconIsVisible,UpdateSourceTrigger=PropertyChanged}"/>
 
                                         <TextBlock Grid.Row="1" Grid.Column="0" 
                                                    Text="Alt Limit"

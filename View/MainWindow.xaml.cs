@@ -76,9 +76,8 @@ namespace ModbusRecorder.View
 
         private void ReportsButtonOnClick(object sender, RoutedEventArgs e)
         {
-            AddRecordWindow view = new AddRecordWindow();
-            var viewNodel = Injector.GetInstance<AddRecordWindowViewModel>();
-            viewNodel.Title = "Yeni Kayıt";
+            ReportsWindows view = new ReportsWindows();
+            var viewNodel = Injector.GetInstance<ReportsViewModel>();
             view.DataContext = viewNodel;
             viewNodel.Init(view);
             view.Show();

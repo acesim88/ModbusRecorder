@@ -76,7 +76,8 @@ namespace ModbusRecorder.ViewModel
                 Description = e.RecordDescription,
                 DownLimit = e.DownLimit,
                 UpLimit = e.UpLimit,
-                IsAlertActivated = e.IsAlertActivated
+                IsAlertActivated = e.IsAlertActivated,
+                AlertIconIsVisible = Visibility.Collapsed
             });
         }
 

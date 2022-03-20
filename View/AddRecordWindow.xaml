@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="{Binding Title}" Height="500" Width="500"
         Icon="..\icons8-add-file-50.png"
-        >
+        Background="{DynamicResource Page.BlueColor}">
 
     <Window.Resources>
         <Style x:Key="IsCheckedStyle"

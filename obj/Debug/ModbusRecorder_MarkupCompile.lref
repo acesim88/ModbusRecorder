@@ -3,5 +3,7 @@
 FC:\ModbusRecorder\ModbusRecorder\View\MainWindow.xaml;;
 FC:\ModbusRecorder\ModbusRecorder\SampleMessageDialog.xaml;;
 FC:\ModbusRecorder\ModbusRecorder\View\AddRecordWindow.xaml;;
+FC:\ModbusRecorder\ModbusRecorder\View\ReportsView.xaml;;
+FC:\ModbusRecorder\ModbusRecorder\View\ReportView.xaml;;
 FC:\ModbusRecorder\ModbusRecorder\View\SettingsWindow.xaml;;
 
